@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import GameDetail from "../components/game-detail/GameDetail";
 import Game from "../components/game/Game";
 import { loadGames } from "../redux/actions/gamesAction";
 
@@ -16,9 +17,35 @@ const Home = () => {
   //   console.log(games);
   return (
     <GameList>
+      <GameDetail />
       <h2>Upcoming Games</h2>
       <Games>
         {upcoming.map((game) => (
+          <Game
+            name={game.name}
+            released={game.released}
+            id={game.id}
+            image={game.background_image}
+            key={game.id}
+            screenshot={game.short_screenshots}
+          />
+        ))}
+      </Games>
+      <h2>Popular Games</h2>
+      <Games>
+        {popular.map((game) => (
+          <Game
+            name={game.name}
+            released={game.released}
+            id={game.id}
+            image={game.background_image}
+            key={game.id}
+          />
+        ))}
+      </Games>
+      <h2>New Games</h2>
+      <Games>
+        {newGames.map((game) => (
           <Game
             name={game.name}
             released={game.released}
