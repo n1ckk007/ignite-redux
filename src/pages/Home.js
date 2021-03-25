@@ -1,12 +1,17 @@
 import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router";
 import styled from "styled-components";
 import GameDetail from "../components/game-detail/GameDetail";
 import Game from "../components/game/Game";
 import { loadGames } from "../redux/actions/gamesAction";
 
 const Home = () => {
+  // get current location
+  const location = useLocation();
+  const pathId = location.pathname.split("/")[2];
+  // console.log(path);
   // fetch games, useEffect will only run when the dispatch happens
   const dispatch = useDispatch();
   useEffect(() => {
@@ -17,7 +22,8 @@ const Home = () => {
   //   console.log(games);
   return (
     <GameList>
-      <GameDetail />
+      {/* if pathId is available render GameDetail otherwise don't */}
+      {pathId && <GameDetail />}
       <h2>Upcoming Games</h2>
       <Games>
         {upcoming.map((game) => (
