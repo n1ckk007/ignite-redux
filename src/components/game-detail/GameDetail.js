@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import {
   CardShadow,
   Detail,
@@ -13,11 +14,21 @@ import {
 const GameDetail = () => {
   // get the state via useSelector and we can extract state.detail
   const { game, screens, isLoading } = useSelector((state) => state.detail);
-
+  const history = useHistory();
+  // exit detail
+  const exitDetailHandler = (e) => {
+    const element = e.target;
+    // console.log(element);
+    if (element.classList.contains("shadow")) {
+      document.body.style.overflow = "auto";
+      // to set the route to home after exiting game detail
+      history.push("/");
+    }
+  };
   return (
     <>
       {!isLoading && (
-        <CardShadow>
+        <CardShadow className="shadow" onClick={exitDetailHandler}>
           <div className="card-shadow">
             <Detail>
               <Stats>
