@@ -1,6 +1,8 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { smallImage } from "../../util";
 import {
   CardShadow,
   Detail,
@@ -11,7 +13,7 @@ import {
   Description,
 } from "./GameDetailStyles";
 
-const GameDetail = () => {
+const GameDetail = ({ pathId }) => {
   // get the state via useSelector and we can extract state.detail
   const { game, screens, isLoading } = useSelector((state) => state.detail);
   const history = useHistory();
@@ -24,16 +26,17 @@ const GameDetail = () => {
       // to set the route to home after exiting game detail
       history.push("/");
     }
+    // console.log(typeof pathId);
   };
   return (
     <>
       {!isLoading && (
         <CardShadow className="shadow" onClick={exitDetailHandler}>
           <div className="card-shadow">
-            <Detail>
+            <Detail layoutId={pathId}>
               <Stats>
                 <div className="rating">
-                  <h3>{game.name}</h3>
+                  <motion.h3 layout={`title ${pathId}`}>{game.name}</motion.h3>
                   <p>Rating: {game.rating}</p>
                 </div>
                 <Info>
@@ -47,14 +50,23 @@ const GameDetail = () => {
                 </Info>
               </Stats>
               <Media>
-                <img src={game.background_image} alt="image" />
+                <motion.img
+                  src={smallImage(game.background_image, 1280)}
+                  alt="image"
+                  layoutId={`image ${pathId}`}
+                />
               </Media>
               <Description>
                 <p>{game.description_raw}</p>
               </Description>
               <div className="gallery">
                 {screens.results.map((screens) => (
-                  <img key={screens.id} src={screens.image} alt="game" />
+                  <img
+                    key={screens.id}
+                    src={smallImage(screens.image, 1280)}
+                    alt="game"
+                    loading="lazy"
+                  />
                 ))}
               </div>
             </Detail>
