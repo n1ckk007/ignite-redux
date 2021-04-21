@@ -12,6 +12,12 @@ import {
   Media,
   Description,
 } from "./GameDetailStyles";
+import playstation from "../../img/playstation.svg";
+import steam from "../../img/steam.svg";
+import xbox from "../../img/xbox.svg";
+import nintendo from "../../img/nintendo.svg";
+import apple from "../../img/apple.svg";
+import gamepad from "../../img/gamepad.svg";
 
 const GameDetail = ({ pathId }) => {
   // get the state via useSelector and we can extract state.detail
@@ -27,6 +33,22 @@ const GameDetail = ({ pathId }) => {
       history.push("/");
     }
     // console.log(typeof pathId);
+  };
+  // function that returns specific img based on the platform.name text
+  const getPlatformImage = (platform) => {
+    if (platform.includes("PlayStation")) {
+      return playstation;
+    } else if (platform.includes("Xbox")) {
+      return xbox;
+    } else if (platform === "PC") {
+      return steam;
+    } else if (platform === "Nintendo Switch") {
+      return nintendo;
+    } else if (platform.includes("OS")) {
+      return apple;
+    } else {
+      return gamepad;
+    }
   };
   return (
     <>
@@ -44,7 +66,12 @@ const GameDetail = ({ pathId }) => {
                   <Platforms>
                     {/* map because platforms is an array */}
                     {game.platforms.map((data) => (
-                      <h3 key={data.platform.id}>{data.platform.name}</h3>
+                      <img
+                        key={data.platform.id}
+                        src={getPlatformImage(data.platform.name)}
+                        alt={data.platform.name}
+                        title={data.platform.name}
+                      ></img>
                     ))}
                   </Platforms>
                 </Info>
