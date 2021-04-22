@@ -18,6 +18,8 @@ import xbox from "../../img/xbox.svg";
 import nintendo from "../../img/nintendo.svg";
 import apple from "../../img/apple.svg";
 import gamepad from "../../img/gamepad.svg";
+import starEmpty from "../../img/star-empty.png";
+import starFull from "../../img/star-full.png";
 
 const GameDetail = ({ pathId }) => {
   // get the state via useSelector and we can extract state.detail
@@ -50,6 +52,22 @@ const GameDetail = ({ pathId }) => {
       return gamepad;
     }
   };
+  // create array of stars and get the rating
+  const getStars = () => {
+    const stars = [];
+    const rating = Math.floor(game.rating);
+    // loop over the rating and check how big the rating is
+    for (let i = 1; i <= 5; i++) {
+      // if i (the count of the rating) is smaller than rating, render a full star
+      if (i <= rating) {
+        stars.push(<img alt="star" key={i} src={starFull}></img>);
+        // if not render empty star
+      } else {
+        stars.push(<img alt="star" key={i} src={starEmpty}></img>);
+      }
+    }
+    return stars;
+  };
   return (
     <>
       {!isLoading && (
@@ -60,6 +78,7 @@ const GameDetail = ({ pathId }) => {
                 <div className="rating">
                   <motion.h3 layout={`title ${pathId}`}>{game.name}</motion.h3>
                   <p>Rating: {game.rating}</p>
+                  {getStars()}
                 </div>
                 <Info>
                   <h3>Platforms</h3>
