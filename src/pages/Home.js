@@ -22,7 +22,9 @@ const Home = () => {
     dispatch(loadGames());
   }, [dispatch]);
   //   pull data from the state
-  const { popular, newGames, upcoming } = useSelector((state) => state.games);
+  const { popular, newGames, upcoming, searched } = useSelector(
+    (state) => state.games
+  );
   //   console.log(games);
   return (
     <GameList>
@@ -32,7 +34,8 @@ const Home = () => {
           {/* if pathId is available render GameDetail otherwise don't */}
           {pathId && <GameDetail pathId={pathId} />}
         </AnimatePresence>
-        <h2>Upcoming Games</h2>
+
+        <h2>Upcoming Games test netlify</h2>
         <Games>
           {upcoming.map((game) => (
             <Game

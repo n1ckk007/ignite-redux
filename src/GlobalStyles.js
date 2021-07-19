@@ -20,6 +20,7 @@ html{
 body{
     font-family: 'Montserrat', sans-serif;
 width: 100%;
+background-color: whitesmoke;
 }
 h2{
     font-size: 3rem;
