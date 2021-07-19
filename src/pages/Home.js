@@ -35,7 +35,7 @@ const Home = () => {
           {pathId && <GameDetail pathId={pathId} />}
         </AnimatePresence>
 
-        <h2>Upcoming Games test netlify</h2>
+        <h2>Upcoming Games</h2>
         <Games>
           {upcoming.map((game) => (
             <Game
