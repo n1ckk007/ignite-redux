@@ -34,7 +34,25 @@ const Home = () => {
           {/* if pathId is available render GameDetail otherwise don't */}
           {pathId && <GameDetail pathId={pathId} />}
         </AnimatePresence>
-
+        {/* if searched is empty then dont render this out */}
+        {searched.length ? (
+          <div className="searched">
+            <Games>
+              {searched.map((game) => (
+                <Game
+                  name={game.name}
+                  released={game.released}
+                  id={game.id}
+                  image={game.background_image}
+                  key={game.id}
+                  screenshot={game.short_screenshots}
+                />
+              ))}
+            </Games>
+          </div>
+        ) : (
+          ""
+        )}
         <h2>Upcoming Games</h2>
         <Games>
           {upcoming.map((game) => (
